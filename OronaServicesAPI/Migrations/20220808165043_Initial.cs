@@ -18,7 +18,8 @@ namespace OronaServicesAPI.Migrations
                     OrderNumber = table.Column<int>(type: "int", nullable: false),
                     RegularPrice = table.Column<double>(type: "float", nullable: false),
                     ChemicalPrice = table.Column<double>(type: "float", nullable: false),
-                    PostConstructionPrice = table.Column<double>(type: "float", nullable: false)
+                    PostConstructionPrice = table.Column<double>(type: "float", nullable: false),
+                    ImgPath = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

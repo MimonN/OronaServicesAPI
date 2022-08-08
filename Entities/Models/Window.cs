@@ -11,17 +11,15 @@ namespace Entities.Models
     {
         public int Id { get; set; }
         [Required]
-        [Display(Name = "Window Type")]
-        public string WindowType { get; set; }
+        public string? WindowType { get; set; }
         public int OrderNumber { get; set; }
         [Required]
-        [Display(Name = "Regular")]
         public double RegularPrice { get; set; }
         [Required]
-        [Display(Name = "Chemical")]
         public double ChemicalPrice { get; set; }
         [Required]
-        [Display(Name = "Post-Construction")]
-        public double PostConstructionPrice { get; set; } 
+        public double PostConstructionPrice { get; set; }
+        [Required]
+        public string? ImgPath { get; set; }
     }
 }

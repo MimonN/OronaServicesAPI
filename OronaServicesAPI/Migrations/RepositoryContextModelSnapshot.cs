@@ -32,6 +32,10 @@ namespace OronaServicesAPI.Migrations
                     b.Property<double>("ChemicalPrice")
                         .HasColumnType("float");
 
+                    b.Property<string>("ImgPath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("OrderNumber")
                         .HasColumnType("int");
 

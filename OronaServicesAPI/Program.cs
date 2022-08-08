@@ -1,5 +1,7 @@
 using Contracts;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.Extensions.FileProviders;
 using NLog;
 using OronaServicesAPI.Extensions;
 
@@ -16,6 +18,12 @@ builder.Services.ConfigureSqlServerContext(builder.Configuration);
 builder.Services.ConfigureRepositoryWrapper();
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.Configure<FormOptions>(o =>
+{
+    o.ValueLengthLimit = int.MaxValue;
+    o.MultipartBodyLengthLimit = int.MaxValue;
+    o.MemoryBufferThreshold = int.MaxValue;
+});
 
 var app = builder.Build();
 
@@ -32,6 +40,11 @@ else
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+    RequestPath = new PathString("/Resources")
+});
 
 app.UseForwardedHeaders(new ForwardedHeadersOptions
 {
