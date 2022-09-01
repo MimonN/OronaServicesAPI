@@ -4,6 +4,7 @@ using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace OronaServicesAPI.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20220831130807_ChangesStatusToState")]
+    partial class ChangesStatusToState
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,9 +47,6 @@ namespace OronaServicesAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("HowDidYouHearAboutUs")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IsItAHomeOrBusiness")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Message")
@@ -208,15 +207,15 @@ namespace OronaServicesAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "da552950-f720-4a24-a505-61547468a52f",
-                            ConcurrencyStamp = "c8a95392-a846-480f-b4a2-4f5160b26500",
+                            Id = "81ff3e77-d79e-417f-8089-82c2738755d7",
+                            ConcurrencyStamp = "9ef48dd1-b5ad-4018-884d-132a63898db0",
                             Name = "Viewer",
                             NormalizedName = "VIEWER"
                         },
                         new
                         {
-                            Id = "d5e944a7-86f9-412f-80a0-485b381d5b07",
-                            ConcurrencyStamp = "242e8db2-b347-4b1e-b06f-5f9372048814",
+                            Id = "8776bbf2-2c2b-4033-b6d3-31635345b750",
+                            ConcurrencyStamp = "359dffac-09c8-448b-92d2-065b95374f60",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });

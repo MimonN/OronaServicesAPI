@@ -11,6 +11,11 @@ namespace OronaServicesAPI
             CreateMap<Window, WindowDto>();
             CreateMap<WindowForCreationDto, Window>();
             CreateMap<WindowForUpdateDto, Window>();
+            CreateMap<ContactUsForCreationDto, ContactUs>().ReverseMap();
+            CreateMap<ContactUsDto, ContactUs>().ReverseMap();
+
+            CreateMap<UserForRegistrationDto, User>()
+                .ForMember(u => u.UserName, opt => opt.MapFrom(x => x.Email));
         }
     }
 }

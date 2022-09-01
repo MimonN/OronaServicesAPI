@@ -2,6 +2,7 @@
 using Contracts;
 using Entities.DataTransferObjects;
 using Entities.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace OronaServicesAPI.Controllers
@@ -33,6 +34,7 @@ namespace OronaServicesAPI.Controllers
         }
 
         [HttpGet("{id}", Name = "WindowById")]
+        [Authorize]
         public async Task<IActionResult> GetWindowById(int id)
         {
             var window = await _repository.Window.GetWindowByIdAsync(id);
@@ -51,6 +53,7 @@ namespace OronaServicesAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateWindow([FromBody] WindowForCreationDto window)
         {
             if (window == null)
@@ -76,6 +79,7 @@ namespace OronaServicesAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> UpdateWindow(int id, [FromBody] WindowForUpdateDto window)
         {
             if (window == null)
@@ -91,6 +95,12 @@ namespace OronaServicesAPI.Controllers
             }
 
             var windowEntity = await _repository.Window.GetWindowByIdAsync(id);
+
+            if (window.ImgPath == null)
+            {
+                window.ImgPath = windowEntity.ImgPath;
+            }
+
             if (windowEntity == null)
             {
                 _logger.LogError($"Window with id: {id}, hasn't been found in db.");
@@ -106,6 +116,7 @@ namespace OronaServicesAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteWindow(int id)
         {
             var window = await _repository.Window.GetWindowByIdAsync(id);
@@ -126,6 +137,17 @@ namespace OronaServicesAPI.Controllers
             await _repository.SaveAsync();
 
             return NoContent();
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        public IActionResult Privacy()
+        {
+            var claims = User.Claims
+                .Select(c => new { c.Type, c.Value })
+                .ToList();
+
+            return Ok(claims);
         }
     }
 }

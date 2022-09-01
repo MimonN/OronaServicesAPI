@@ -12,6 +12,7 @@ namespace Repository
     {
         private RepositoryContext _repoContext;
         private IWindowRepository _window;
+        private IContactUsRepository _contactUs;
 
         public RepositoryWrapper(RepositoryContext repositoryContext)
         {
@@ -27,6 +28,19 @@ namespace Repository
                 }
 
                 return _window;
+            }
+        }
+
+        public IContactUsRepository ContactUs
+        {
+            get
+            {
+                if(_contactUs == null)
+                {
+                    _contactUs = new ContactUsRepository(_repoContext);
+                }
+
+                return _contactUs;
             }
         }
 

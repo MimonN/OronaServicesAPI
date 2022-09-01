@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
@@ -6,6 +7,7 @@ using System.Net.Http.Headers;
 namespace OronaServicesAPI.Controllers
 {
     [Route("api/[controller]/[action]")]
+    [Authorize]
     [ApiController]
     public class UploadController : ControllerBase
     {

@@ -9,6 +9,7 @@ namespace Contracts
     public interface IRepositoryWrapper
     {
         IWindowRepository Window { get; }
+        IContactUsRepository ContactUs { get; }
         Task SaveAsync();
     }
 }
