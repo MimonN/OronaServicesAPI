@@ -140,7 +140,7 @@ namespace OronaServicesAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Administrator")]
+        [Authorize]
         public IActionResult Privacy()
         {
             var claims = User.Claims

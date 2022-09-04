@@ -13,9 +13,7 @@ namespace Entities.DataTransferObjects
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
-        public string IsItAHomeOrBusiness { get; set; }
         public string Message { get; set; }
-        public string HowDidYouHearAboutUs { get; set; }
         public string State { get; set; }
         public string Note { get; set; }
     }

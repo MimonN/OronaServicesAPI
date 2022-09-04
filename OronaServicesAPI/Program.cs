@@ -66,11 +66,18 @@ app.ConfigureCustomExceptionMiddleware();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
-else
-    app.UseHsts();
 
-app.UseHttpsRedirection();
+app.Use(async (context, next) =>
+{
+    await next();
 
+    if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
+    {
+        context.Request.Path = "/index.html";
+    }
+});
+
+app.UseDefaultFiles();
 app.UseStaticFiles();
 app.UseStaticFiles(new StaticFileOptions()
 {

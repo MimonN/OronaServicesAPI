@@ -2,12 +2,15 @@
 using Contracts;
 using Entities.DataTransferObjects;
 using Entities.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace OronaServicesAPI.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class ContactUsController : ControllerBase
     {
         private readonly IRepositoryWrapper _repository;
@@ -61,7 +64,7 @@ namespace OronaServicesAPI.Controllers
             return NoContent();
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateContactUs(int id, [FromBody] ContactUsForUpdateDto contactUs)
         {
             if (contactUs == null)
@@ -79,6 +82,7 @@ namespace OronaServicesAPI.Controllers
             {
                 return NotFound();
             }
+            contactUsEntity.EditTime = DateTime.Now;
 
             _mapper.Map(contactUs, contactUsEntity);
             _repository.ContactUs.UpdateContactUs(contactUsEntity);
