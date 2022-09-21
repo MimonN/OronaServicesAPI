@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace OronaServicesAPI.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20220825141541_AddedContactUsEntityToDb")]
-    partial class AddedContactUsEntityToDb
+    [Migration("20220904190558_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,59 @@ namespace OronaServicesAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("Entities.Models.ContactUs", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("EditTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HowDidYouHearAboutUs")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IsItAHomeOrBusiness")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ContactUs");
+                });
 
             modelBuilder.Entity("Entities.Models.User", b =>
                 {
@@ -157,15 +210,15 @@ namespace OronaServicesAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b9327761-24fc-49a8-8d89-f4b87624a687",
-                            ConcurrencyStamp = "6313b4c9-27f7-4bb2-a2c3-509a1021b08b",
+                            Id = "1bbefc66-7c71-4019-9709-af78af3fdc9f",
+                            ConcurrencyStamp = "85bc57bc-4b89-4122-95c7-731ecded1bf6",
                             Name = "Viewer",
                             NormalizedName = "VIEWER"
                         },
                         new
                         {
-                            Id = "d23e968b-5f5f-496a-859d-3166dcf8e244",
-                            ConcurrencyStamp = "6b8319ae-120c-4c6d-b2b8-8ba9d9d1cd33",
+                            Id = "9892efa5-3d0e-4c84-9c0b-bbc37cb55abe",
+                            ConcurrencyStamp = "4a07adb1-daaa-408f-ae3d-bbf61d876b83",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });

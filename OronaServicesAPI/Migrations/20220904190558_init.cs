@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OronaServicesAPI.Migrations
 {
-    public partial class AddedIdentityDbContextwithUserModel : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,6 +48,47 @@ namespace OronaServicesAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ContactUs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    HowDidYouHearAboutUs = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsItAHomeOrBusiness = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    State = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EditTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ContactUs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Windows",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    WindowType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OrderNumber = table.Column<int>(type: "int", nullable: false),
+                    RegularPrice = table.Column<double>(type: "float", nullable: false),
+                    ChemicalPrice = table.Column<double>(type: "float", nullable: false),
+                    PostConstructionPrice = table.Column<double>(type: "float", nullable: false),
+                    ImgPath = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Windows", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -156,6 +197,16 @@ namespace OronaServicesAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "1bbefc66-7c71-4019-9709-af78af3fdc9f", "85bc57bc-4b89-4122-95c7-731ecded1bf6", "Viewer", "VIEWER" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "9892efa5-3d0e-4c84-9c0b-bbc37cb55abe", "4a07adb1-daaa-408f-ae3d-bbf61d876b83", "Administrator", "ADMINISTRATOR" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -212,6 +263,12 @@ namespace OronaServicesAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "ContactUs");
+
+            migrationBuilder.DropTable(
+                name: "Windows");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

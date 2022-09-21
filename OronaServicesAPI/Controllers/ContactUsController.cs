@@ -2,7 +2,9 @@
 using Contracts;
 using Entities.DataTransferObjects;
 using Entities.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace OronaServicesAPI.Controllers
 {
@@ -20,6 +22,7 @@ namespace OronaServicesAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAllContactUs()
         {
             var contactUs = await _repository.ContactUs.GetAllContactUsAsync();
@@ -28,6 +31,7 @@ namespace OronaServicesAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<IActionResult> GetContactUs(int id)
         {
             var contactUs = await _repository.ContactUs.GetContactUsAsync(id);
@@ -61,7 +65,8 @@ namespace OronaServicesAPI.Controllers
             return NoContent();
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> UpdateContactUs(int id, [FromBody] ContactUsForUpdateDto contactUs)
         {
             if (contactUs == null)
@@ -79,6 +84,7 @@ namespace OronaServicesAPI.Controllers
             {
                 return NotFound();
             }
+            contactUsEntity.EditTime = DateTime.Now;
 
             _mapper.Map(contactUs, contactUsEntity);
             _repository.ContactUs.UpdateContactUs(contactUsEntity);
@@ -88,6 +94,7 @@ namespace OronaServicesAPI.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         public async Task<IActionResult> DeleteContactUs(int id)
         {
             var contactUs = await _repository.ContactUs.GetContactUsAsync(id);
