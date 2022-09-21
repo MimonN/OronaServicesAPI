@@ -208,15 +208,15 @@ namespace OronaServicesAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "da552950-f720-4a24-a505-61547468a52f",
-                            ConcurrencyStamp = "c8a95392-a846-480f-b4a2-4f5160b26500",
+                            Id = "1bbefc66-7c71-4019-9709-af78af3fdc9f",
+                            ConcurrencyStamp = "85bc57bc-4b89-4122-95c7-731ecded1bf6",
                             Name = "Viewer",
                             NormalizedName = "VIEWER"
                         },
                         new
                         {
-                            Id = "d5e944a7-86f9-412f-80a0-485b381d5b07",
-                            ConcurrencyStamp = "242e8db2-b347-4b1e-b06f-5f9372048814",
+                            Id = "9892efa5-3d0e-4c84-9c0b-bbc37cb55abe",
+                            ConcurrencyStamp = "4a07adb1-daaa-408f-ae3d-bbf61d876b83",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });

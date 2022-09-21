@@ -10,7 +10,6 @@ namespace OronaServicesAPI.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    [Authorize]
     public class ContactUsController : ControllerBase
     {
         private readonly IRepositoryWrapper _repository;
@@ -23,6 +22,7 @@ namespace OronaServicesAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAllContactUs()
         {
             var contactUs = await _repository.ContactUs.GetAllContactUsAsync();
@@ -31,6 +31,7 @@ namespace OronaServicesAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<IActionResult> GetContactUs(int id)
         {
             var contactUs = await _repository.ContactUs.GetContactUsAsync(id);
@@ -65,6 +66,7 @@ namespace OronaServicesAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> UpdateContactUs(int id, [FromBody] ContactUsForUpdateDto contactUs)
         {
             if (contactUs == null)
@@ -92,6 +94,7 @@ namespace OronaServicesAPI.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         public async Task<IActionResult> DeleteContactUs(int id)
         {
             var contactUs = await _repository.ContactUs.GetContactUsAsync(id);

@@ -2,6 +2,7 @@ using Contracts;
 using Entities;
 using Entities.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
@@ -66,6 +67,10 @@ app.ConfigureCustomExceptionMiddleware();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
+else
+    app.UseHsts();
+
+app.UseHttpsRedirection();
 
 app.Use(async (context, next) =>
 {
@@ -74,6 +79,7 @@ app.Use(async (context, next) =>
     if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
     {
         context.Request.Path = "/index.html";
+        await next();
     }
 });
 
